@@ -21,9 +21,19 @@
     End Sub
 
     Private Sub btnAddWater_Click(sender As Object, e As EventArgs) Handles btnAddWater.Click
-        'Send water values and operational 
-        FrmMain.AddWater(tbxGallonsPerHour.Text, tbxPricePerGallon.Text, decOpHrs)
-        Me.Hide()
+        'Check values for absurdity
+        If tbxGallonsPerHour.Text > 100 Then
+            MessageBox.Show("That is a lot of water for a home appliance", "Public Service Announcement")
+            tbxGallonsPerHour.Focus()
+        ElseIf tbxPricePerGallon.Text > 1 Then
+            MessageBox.Show("What are you useing for water?  That is very expensive", "Public Service Announcement")
+            tbxGallonsPerHour.Focus()
+        Else
+            'Send water values and operational 
+            FrmMain.AddWater(tbxGallonsPerHour.Text, tbxPricePerGallon.Text, decOpHrs)
+            Me.Hide()
+        End If
+        
     End Sub
 
     Private Sub btnClearWater_Click(sender As Object, e As EventArgs) Handles btnClearWater.Click

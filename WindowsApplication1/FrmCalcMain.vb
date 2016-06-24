@@ -6,7 +6,7 @@
     Dim decGallonTotalCost As Decimal = 0
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'Nothing
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -15,6 +15,7 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        'Call clear function
         ClearForm()
     End Sub
 
@@ -54,7 +55,7 @@
                 strViewLoad(4) = CStr(decApplianceCostPerLine)
                 'Construct line as string. 
                 Dim strLineLoad As String = ""
-                'Formating based on length of the string
+                'Formating based on length of the string if name is short add two tabs if name is long only 1. 
                 If strViewLoad(0) = "Fan" Or strViewLoad(0) = "TV" Or strViewLoad(0) = "Dryer" Or strViewLoad(0) = "Oven" Then
                     strLineLoad = strViewLoad(0) & vbTab & vbTab & strViewLoad(1) & "KW" & vbTab & strViewLoad(2) & "Hrs" & vbTab & strViewLoad(3) & "KWh" & vbTab & FormatCurrency(strViewLoad(4))
                 Else
