@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "EnergyCalculator", "WindowsApplication1\EnergyCalculator.vbproj", "{DCB8A3DE-9236-4321-B6CB-8736BCF54D6B}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Week2Version3", "..\Week2POS408_2\Week2Version3\Week2Version3\Week2Version3.vbproj", "{5E29A000-0D5B-4C6D-91FE-E6882B327D7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCB8A3DE-9236-4321-B6CB-8736BCF54D6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB8A3DE-9236-4321-B6CB-8736BCF54D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB8A3DE-9236-4321-B6CB-8736BCF54D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB8A3DE-9236-4321-B6CB-8736BCF54D6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E29A000-0D5B-4C6D-91FE-E6882B327D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E29A000-0D5B-4C6D-91FE-E6882B327D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E29A000-0D5B-4C6D-91FE-E6882B327D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E29A000-0D5B-4C6D-91FE-E6882B327D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

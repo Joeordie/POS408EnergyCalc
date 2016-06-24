@@ -1,0 +1,12 @@
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\bin\Debug\WindowsApplication1.exe.config
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\bin\Debug\WindowsApplication1.xml
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.FrmMain.resources
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.Resources.resources
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\EnergyCalculator.vbproj.GenerateResource.Cache
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.xml
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.pdb
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.FrmWater.resources
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\EnergyCalculator.vbprojResolveAssemblyReference.cache
