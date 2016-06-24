@@ -19,49 +19,61 @@
     End Sub
 
     Function AddAppliance()
-        'Declare appliance name for check and internal decimal rate 
-        Dim StrApplianceName As String = cbxAppliance.Text
-        Dim decRate As Decimal = tbxRate.Text
-        'Perform Appliance Check Function if the AddAppianceCheck returns a 0 then its goodnow perform math
-        If AddApplianceCheck(StrApplianceName, decRate) = 0 Then
-            Dim decApplianceKWh As Decimal = tbxKWh.Text
-            Dim decApplianceOpHours As Decimal = tbxHoursOp.Text
-            'Calculate appliance KWh from Kilowatts * Operation Hours
-            Dim decApplianceTotalKWh As Decimal = decApplianceKWh * decApplianceOpHours
-            'Calculate Cost of appliance by multiplying ApplianceKWh * KWh Rate. 
-            Dim decApplianceCostPerLine As Decimal = decApplianceTotalKWh * decRate
-            'Increment Total cost tally. 
-            decTotalCost = decTotalCost + decApplianceCostPerLine
-            'Display total cost
-            tbxTotalEnergyCost.Text = decTotalCost
-            'Increment Total KWh tally
-            decGrandTotalKWh = decGrandTotalKWh + decApplianceTotalKWh
-            'Display total KWh
-            tbxGrandTotalKWh.Text = decGrandTotalKWh
-            'Set Operating hours on appliances that use water. 
-            FrmWater.DecOpHrs = decApplianceOpHours
-            '
-            ' ListView Loading Result
-            'Dim objLoader As ListViewItem
-            '
-            'Build and load array of strings 
-            Dim strViewLoad(4) As String            
-            strViewLoad(0) = StrApplianceName
-            strViewLoad(1) = CStr(decApplianceKWh)
-            strViewLoad(2) = CStr(decApplianceOpHours)
-            strViewLoad(3) = CStr(decApplianceTotalKWh)
-            strViewLoad(4) = CStr(decApplianceCostPerLine)
-            'Construct line as string. 
-            Dim strLineLoad As String = strViewLoad(0) & "    " & strViewLoad(1) & "KW    " & strViewLoad(2) & "Hrs    " & strViewLoad(3) & "KWh    $" & strViewLoad(4)
-            ltvResult.Items.Add(strLineLoad)
-            '
-            'Could not get objectLoader to work below... never added the entire array only first element :(
-            '
-            'objLoader = New ListViewItem(strViewLoad)
-            'ltvResult.Items.Add(objLoader)
-        Else
-            cbxAppliance.Focus()
-        End If
+        Try
+            'Declare appliance name for check and internal decimal rate 
+            Dim StrApplianceName As String = cbxAppliance.Text
+            Dim decRate As Decimal = tbxRate.Text
+            'Perform Appliance Check Function if the AddAppianceCheck returns a 0 then its goodnow perform math
+            If AddApplianceCheck(StrApplianceName, decRate) = 0 Then
+                Dim decApplianceKWh As Decimal = tbxKWh.Text
+                Dim decApplianceOpHours As Decimal = tbxHoursOp.Text
+                'Calculate appliance KWh from Kilowatts * Operation Hours 
+                Dim decApplianceTotalKWh As Decimal = decApplianceKWh * decApplianceOpHours
+                'Calculate Cost of appliance by multiplying ApplianceKWh * KWh Rate.  
+                Dim decApplianceCostPerLine As Decimal = decApplianceTotalKWh * decRate
+                'Increment Total cost tally.  
+                decTotalCost = decTotalCost + decApplianceCostPerLine
+                'Display total cost 
+                tbxTotalEnergyCost.Text = FormatCurrency(decTotalCost)
+                'Increment Total KWh tally 
+                decGrandTotalKWh = decGrandTotalKWh + decApplianceTotalKWh
+                'Display total KWh 
+                tbxGrandTotalKWh.Text = decGrandTotalKWh
+                'Set Operating hours on appliances that use water. 
+                FrmWater.decOpHrs = decApplianceOpHours
+                ' 
+                '  ListView Loading Result
+                'Dim objLoader As ListViewItem
+                ' 
+                'Build and load array of strings 
+                Dim strViewLoad(4) As String
+                strViewLoad(0) = StrApplianceName
+                strViewLoad(1) = CStr(decApplianceKWh)
+                strViewLoad(2) = CStr(decApplianceOpHours)
+                strViewLoad(3) = CStr(decApplianceTotalKWh)
+                strViewLoad(4) = CStr(decApplianceCostPerLine)
+                'Construct line as string. 
+                Dim strLineLoad As String = ""
+                'Formating based on length of the string
+                If strViewLoad(0) = "Fan" Or strViewLoad(0) = "TV" Or strViewLoad(0) = "Dryer" Or strViewLoad(0) = "Oven" Then
+                    strLineLoad = strViewLoad(0) & vbTab & vbTab & strViewLoad(1) & "KW" & vbTab & strViewLoad(2) & "Hrs" & vbTab & strViewLoad(3) & "KWh" & vbTab & FormatCurrency(strViewLoad(4))
+                Else
+                    strLineLoad = strViewLoad(0) & vbTab & strViewLoad(1) & "KW" & vbTab & strViewLoad(2) & "Hrs" & vbTab & strViewLoad(3) & "KWh" & vbTab & FormatCurrency(strViewLoad(4))
+                End If
+
+                lbxResult.Items.Add(strLineLoad)
+                '
+                'Could not get objectLoader to work below... never added the entire array only first element :(
+                '
+                'objLoader = New ListViewItem(strViewLoad)
+                'ltvResult.Items.Add(objLoader)  
+            Else
+                cbxAppliance.Focus()
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("One or more inputs is wrong, usually this means you have too many '.' in an input field.", "Public Service Announcement")
+        End Try
     End Function
 
     Function AddWater(DecGalPerHour As Decimal, DecPricePerGallon As Decimal, DecOpHours As Decimal)
@@ -69,9 +81,9 @@
         Dim decGallonsPerLine = DecGalPerHour * DecOpHours
         Dim decGallonCostPerLine = decGallonsPerLine * DecPricePerGallon
         'Make a string to load into the listview 
-        Dim strLineLoad As String = decGallonsPerLine & " Gals    $" & decGallonCostPerLine
+        Dim strLineLoad As String = decGallonsPerLine & " Gals" & vbTab & vbTab & vbTab & vbTab & vbTab & "$" & decGallonCostPerLine
         'load string into listview
-        ltvResult.Items.Add(strLineLoad)
+        lbxResult.Items.Add(strLineLoad)
         'increment global usage variables (gallon cost and gallons used.)
         decGallonTotalCost = decGallonTotalCost + decGallonCostPerLine
         decGrandTotalGallon = decGrandTotalGallon + decGallonsPerLine
@@ -102,7 +114,7 @@
         tbxHoursOp.Text = "0"
         tbxKWh.Text = "0"
         tbxRate.Text = "0"
-        ltvResult.Items.Clear()
+        lbxResult.Items.Clear()
         decTotalCost = "0"
         decGallonTotalCost = "0"
         decGrandTotalKWh = "0"

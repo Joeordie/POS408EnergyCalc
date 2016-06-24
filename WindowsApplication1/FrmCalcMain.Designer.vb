@@ -32,8 +32,6 @@ Partial Class FrmMain
         Me.tbxHoursOp = New System.Windows.Forms.TextBox()
         Me.lblRate = New System.Windows.Forms.Label()
         Me.tbxRate = New System.Windows.Forms.TextBox()
-        Me.ltvResult = New System.Windows.Forms.ListView()
-        Me.ColResult = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lblGrandTotalKWh = New System.Windows.Forms.Label()
         Me.tbxGrandTotalKWh = New System.Windows.Forms.TextBox()
         Me.lblTotalEnergyCost = New System.Windows.Forms.Label()
@@ -42,6 +40,7 @@ Partial Class FrmMain
         Me.tbxTotalGallon = New System.Windows.Forms.TextBox()
         Me.lblTotalWaterCost = New System.Windows.Forms.Label()
         Me.tbxTotalGallonCost = New System.Windows.Forms.TextBox()
+        Me.lbxResult = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
         '
         'cbxAppliance
@@ -132,26 +131,6 @@ Partial Class FrmMain
         Me.tbxRate.TabIndex = 11
         Me.tbxRate.Text = "0"
         '
-        'ltvResult
-        '
-        Me.ltvResult.Alignment = System.Windows.Forms.ListViewAlignment.Left
-        Me.ltvResult.BackgroundImageTiled = True
-        Me.ltvResult.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColResult})
-        Me.ltvResult.FullRowSelect = True
-        Me.ltvResult.GridLines = True
-        Me.ltvResult.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        Me.ltvResult.LabelWrap = False
-        Me.ltvResult.Location = New System.Drawing.Point(12, 186)
-        Me.ltvResult.Name = "ltvResult"
-        Me.ltvResult.Size = New System.Drawing.Size(472, 284)
-        Me.ltvResult.TabIndex = 12
-        Me.ltvResult.UseCompatibleStateImageBehavior = False
-        '
-        'ColResult
-        '
-        Me.ColResult.Text = "Result"
-        Me.ColResult.Width = 450
-        '
         'lblGrandTotalKWh
         '
         Me.lblGrandTotalKWh.AutoSize = True
@@ -220,12 +199,21 @@ Partial Class FrmMain
         Me.tbxTotalGallonCost.Size = New System.Drawing.Size(100, 20)
         Me.tbxTotalGallonCost.TabIndex = 20
         '
+        'lbxResult
+        '
+        Me.lbxResult.FormattingEnabled = True
+        Me.lbxResult.Location = New System.Drawing.Point(16, 196)
+        Me.lbxResult.Name = "lbxResult"
+        Me.lbxResult.Size = New System.Drawing.Size(475, 277)
+        Me.lbxResult.TabIndex = 21
+        '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(503, 604)
+        Me.Controls.Add(Me.lbxResult)
         Me.Controls.Add(Me.tbxTotalGallonCost)
         Me.Controls.Add(Me.lblTotalWaterCost)
         Me.Controls.Add(Me.tbxTotalGallon)
@@ -234,7 +222,6 @@ Partial Class FrmMain
         Me.Controls.Add(Me.lblTotalEnergyCost)
         Me.Controls.Add(Me.tbxGrandTotalKWh)
         Me.Controls.Add(Me.lblGrandTotalKWh)
-        Me.Controls.Add(Me.ltvResult)
         Me.Controls.Add(Me.tbxRate)
         Me.Controls.Add(Me.lblRate)
         Me.Controls.Add(Me.tbxHoursOp)
@@ -261,8 +248,6 @@ Partial Class FrmMain
     Friend WithEvents tbxHoursOp As System.Windows.Forms.TextBox
     Friend WithEvents lblRate As System.Windows.Forms.Label
     Friend WithEvents tbxRate As System.Windows.Forms.TextBox
-    Friend WithEvents ltvResult As System.Windows.Forms.ListView
-    Friend WithEvents ColResult As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblGrandTotalKWh As System.Windows.Forms.Label
     Friend WithEvents tbxGrandTotalKWh As System.Windows.Forms.TextBox
     Friend WithEvents lblTotalEnergyCost As System.Windows.Forms.Label
@@ -271,5 +256,6 @@ Partial Class FrmMain
     Friend WithEvents tbxTotalGallon As System.Windows.Forms.TextBox
     Friend WithEvents lblTotalWaterCost As System.Windows.Forms.Label
     Friend WithEvents tbxTotalGallonCost As System.Windows.Forms.TextBox
+    Friend WithEvents lbxResult As System.Windows.Forms.ListBox
 
 End Class
