@@ -1,4 +1,5 @@
 ﻿Public Class FrmWater
+    'Global variable that is set by frmCalcMain in AddApplication() function
     Public decOpHrs As Decimal
 
     Private Sub FrmWater_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -20,11 +21,13 @@
     End Sub
 
     Private Sub btnAddWater_Click(sender As Object, e As EventArgs) Handles btnAddWater.Click
+        'Send water values and operational 
         FrmMain.AddWater(tbxGallonsPerHour.Text, tbxPricePerGallon.Text, decOpHrs)
         Me.Hide()
     End Sub
 
     Private Sub btnClearWater_Click(sender As Object, e As EventArgs) Handles btnClearWater.Click
+        'Reset form to 0
         tbxGallonsPerHour.Text = "0"
         tbxPricePerGallon.Text = "0"
     End Sub

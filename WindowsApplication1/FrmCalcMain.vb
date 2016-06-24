@@ -1,4 +1,5 @@
 ﻿Public Class FrmMain
+    'Declare Form-wide variables
     Dim decTotalCost As Decimal = 0
     Dim decGrandTotalKWh As Decimal = 0
     Dim decGrandTotalGallon As Decimal = 0
@@ -9,6 +10,7 @@
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        'Call Function
         AddAppliance()
     End Sub
 
@@ -17,30 +19,40 @@
     End Sub
 
     Function AddAppliance()
+        'Declare appliance name for check and internal decimal rate 
         Dim StrApplianceName As String = cbxAppliance.Text
         Dim decRate As Decimal = tbxRate.Text
-        'Perform Appliance Check Function
+        'Perform Appliance Check Function if the AddAppianceCheck returns a 0 then its goodnow perform math
         If AddApplianceCheck(StrApplianceName, decRate) = 0 Then
             Dim decApplianceKWh As Decimal = tbxKWh.Text
             Dim decApplianceOpHours As Decimal = tbxHoursOp.Text
+            'Calculate appliance KWh from Kilowatts * Operation Hours
             Dim decApplianceTotalKWh As Decimal = decApplianceKWh * decApplianceOpHours
+            'Calculate Cost of appliance by multiplying ApplianceKWh * KWh Rate. 
             Dim decApplianceCostPerLine As Decimal = decApplianceTotalKWh * decRate
+            'Increment Total cost tally. 
             decTotalCost = decTotalCost + decApplianceCostPerLine
+            'Display total cost
             tbxTotalEnergyCost.Text = decTotalCost
+            'Increment Total KWh tally
             decGrandTotalKWh = decGrandTotalKWh + decApplianceTotalKWh
+            'Display total KWh
             tbxGrandTotalKWh.Text = decGrandTotalKWh
+            'Set Operating hours on appliances that use water. 
             FrmWater.DecOpHrs = decApplianceOpHours
             '
-            '
             ' ListView Loading Result
-            Dim strViewLoad(4) As String
             'Dim objLoader As ListViewItem
+            '
+            'Build and load array of strings 
+            Dim strViewLoad(4) As String            
             strViewLoad(0) = StrApplianceName
             strViewLoad(1) = CStr(decApplianceKWh)
             strViewLoad(2) = CStr(decApplianceOpHours)
             strViewLoad(3) = CStr(decApplianceTotalKWh)
             strViewLoad(4) = CStr(decApplianceCostPerLine)
-            Dim strLineLoad As String = StrApplianceName & "    " & decApplianceKWh & "KWh    " & decApplianceOpHours & "Hrs    " & decApplianceTotalKWh & "KWh    $" & decApplianceCostPerLine
+            'Construct line as string. 
+            Dim strLineLoad As String = strViewLoad(0) & "    " & strViewLoad(1) & "KW    " & strViewLoad(2) & "Hrs    " & strViewLoad(3) & "KWh    $" & strViewLoad(4)
             ltvResult.Items.Add(strLineLoad)
             '
             'Could not get objectLoader to work below... never added the entire array only first element :(
@@ -56,16 +68,20 @@
         'Perform Math to determine Gallon Usage and Cost per Usage
         Dim decGallonsPerLine = DecGalPerHour * DecOpHours
         Dim decGallonCostPerLine = decGallonsPerLine * DecPricePerGallon
+        'Make a string to load into the listview 
         Dim strLineLoad As String = decGallonsPerLine & " Gals    $" & decGallonCostPerLine
+        'load string into listview
         ltvResult.Items.Add(strLineLoad)
+        'increment global usage variables (gallon cost and gallons used.)
         decGallonTotalCost = decGallonTotalCost + decGallonCostPerLine
-        decGrandTotalGallon = decGrandTotalGallon + decGallonCostPerLine
+        decGrandTotalGallon = decGrandTotalGallon + decGallonsPerLine
+        'update global variable display
         tbxTotalGallon.Text = decGrandTotalGallon
         tbxTotalGallonCost.Text = decGallonTotalCost
     End Function
 
     Function AddApplianceCheck(strApplianceCheckName As String, ApplianceRate As Decimal)
-        'Check input for Appliance to be set to something
+        'Check input for Appliance to be set to something Return 0 if good return 1 if we should not do maths
         If strApplianceCheckName = "" Then
             MessageBox.Show("Please Choose An Appliance", "Public Service Announcement")
             Return 1
@@ -82,6 +98,7 @@
     End Function
 
     Private Sub ClearForm()
+        'set all displays and global variables to default values
         tbxHoursOp.Text = "0"
         tbxKWh.Text = "0"
         tbxRate.Text = "0"
