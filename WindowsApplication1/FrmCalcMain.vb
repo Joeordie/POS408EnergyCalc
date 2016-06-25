@@ -57,9 +57,9 @@
                 Dim strLineLoad As String = ""
                 'Formating based on length of the string if name is short add two tabs if name is long only 1. 
                 If strViewLoad(0) = "Fan" Or strViewLoad(0) = "TV" Or strViewLoad(0) = "Dryer" Or strViewLoad(0) = "Oven" Then
-                    strLineLoad = strViewLoad(0) & vbTab & vbTab & strViewLoad(1) & "KW" & vbTab & strViewLoad(2) & "Hrs" & vbTab & strViewLoad(3) & "KWh" & vbTab & FormatCurrency(strViewLoad(4))
+                    strLineLoad = String.Format("{1}{0}{0}{2}KW{0}{3}Hrs{0}{4}KWh{0}{5}", vbTab, strViewLoad(0), strViewLoad(1), strViewLoad(2), strViewLoad(3), FormatCurrency(strViewLoad(4)))
                 Else
-                    strLineLoad = strViewLoad(0) & vbTab & strViewLoad(1) & "KW" & vbTab & strViewLoad(2) & "Hrs" & vbTab & strViewLoad(3) & "KWh" & vbTab & FormatCurrency(strViewLoad(4))
+                    strLineLoad = String.Format("{1}{0}{2}KW{0}{3}Hrs{0}{4}KWh{0}{5}", vbTab, strViewLoad(0), strViewLoad(1), strViewLoad(2), strViewLoad(3), FormatCurrency(strViewLoad(4)))
                 End If
 
                 lbxResult.Items.Add(strLineLoad)
