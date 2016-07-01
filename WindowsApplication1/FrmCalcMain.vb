@@ -217,10 +217,14 @@ Public Class FrmMain
             objStreamWriter.WriteLine(lbxResult.Items(i))
         Next
         objStreamWriter.WriteLine("===============================================================")
+
+
+        Dim dblA As Double
+        Dim dblB As Double
         objStreamWriter.WriteLine("Total KWh: " & FormatCurrency(tbxGrandTotalKWh.Text) & vbTab & vbTab & "Total Energy Cost: " & FormatCurrency(tbxTotalEnergyCost.Text) & vbNewLine)
+        dblA = Convert.ToDouble(tbxTotalEnergyCost.Text.Substring(1))
         objStreamWriter.WriteLine("Total Gallons: " & FormatCurrency(tbxTotalGallonCost.Text) & vbTab & vbTab & "Total Water Cost: " & FormatCurrency(tbxTotalGallonCost.Text) & vbNewLine)
-        Dim dblA As Double = Convert.ToDouble(tbxTotalEnergyCost.Text.Substring(1))
-        Dim dblB As Double = Convert.ToDouble(tbxTotalGallonCost.Text.Substring(1))
+        dblB = Convert.ToDouble(tbxTotalGallonCost.Text.Substring(1))
         Dim dblTotal As Double = (dblA + dblB)
         objStreamWriter.WriteLine("Total Cost:  " & FormatCurrency(dblTotal))
         objStreamWriter.Close()

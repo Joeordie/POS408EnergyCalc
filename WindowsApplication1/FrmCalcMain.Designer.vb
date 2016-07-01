@@ -158,6 +158,7 @@ Partial Class FrmMain
         Me.tbxGrandTotalKWh.ReadOnly = True
         Me.tbxGrandTotalKWh.Size = New System.Drawing.Size(100, 20)
         Me.tbxGrandTotalKWh.TabIndex = 14
+        Me.tbxGrandTotalKWh.Text = "0"
         '
         'lblTotalEnergyCost
         '
@@ -175,6 +176,7 @@ Partial Class FrmMain
         Me.tbxTotalEnergyCost.ReadOnly = True
         Me.tbxTotalEnergyCost.Size = New System.Drawing.Size(100, 20)
         Me.tbxTotalEnergyCost.TabIndex = 16
+        Me.tbxTotalEnergyCost.Text = "$0"
         '
         'lblTotalGallons
         '
@@ -192,6 +194,7 @@ Partial Class FrmMain
         Me.tbxTotalGallon.ReadOnly = True
         Me.tbxTotalGallon.Size = New System.Drawing.Size(100, 20)
         Me.tbxTotalGallon.TabIndex = 18
+        Me.tbxTotalGallon.Text = "0"
         '
         'lblTotalWaterCost
         '
@@ -209,6 +212,7 @@ Partial Class FrmMain
         Me.tbxTotalGallonCost.ReadOnly = True
         Me.tbxTotalGallonCost.Size = New System.Drawing.Size(100, 20)
         Me.tbxTotalGallonCost.TabIndex = 20
+        Me.tbxTotalGallonCost.Text = "$0"
         '
         'lbxResult
         '
@@ -249,7 +253,7 @@ Partial Class FrmMain
         'ExportReportToolStripMenuItem
         '
         Me.ExportReportToolStripMenuItem.Name = "ExportReportToolStripMenuItem"
-        Me.ExportReportToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExportReportToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ExportReportToolStripMenuItem.Text = "Export Report"
         '
         'ExitToolStripMenuItem
