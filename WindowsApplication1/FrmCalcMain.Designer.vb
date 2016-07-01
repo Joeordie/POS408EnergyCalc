@@ -41,6 +41,7 @@ Partial Class FrmMain
         Me.lblTotalWaterCost = New System.Windows.Forms.Label()
         Me.tbxTotalGallonCost = New System.Windows.Forms.TextBox()
         Me.lbxResult = New System.Windows.Forms.ListBox()
+        Me.btnDefault = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cbxAppliance
@@ -204,15 +205,25 @@ Partial Class FrmMain
         Me.lbxResult.FormattingEnabled = True
         Me.lbxResult.Location = New System.Drawing.Point(16, 196)
         Me.lbxResult.Name = "lbxResult"
-        Me.lbxResult.Size = New System.Drawing.Size(475, 277)
+        Me.lbxResult.Size = New System.Drawing.Size(410, 264)
         Me.lbxResult.TabIndex = 21
+        '
+        'btnDefault
+        '
+        Me.btnDefault.Location = New System.Drawing.Point(227, 157)
+        Me.btnDefault.Name = "btnDefault"
+        Me.btnDefault.Size = New System.Drawing.Size(103, 23)
+        Me.btnDefault.TabIndex = 22
+        Me.btnDefault.Text = "Load Defaults"
+        Me.btnDefault.UseVisualStyleBackColor = True
         '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(503, 604)
+        Me.ClientSize = New System.Drawing.Size(445, 585)
+        Me.Controls.Add(Me.btnDefault)
         Me.Controls.Add(Me.lbxResult)
         Me.Controls.Add(Me.tbxTotalGallonCost)
         Me.Controls.Add(Me.lblTotalWaterCost)
@@ -257,5 +268,6 @@ Partial Class FrmMain
     Friend WithEvents lblTotalWaterCost As System.Windows.Forms.Label
     Friend WithEvents tbxTotalGallonCost As System.Windows.Forms.TextBox
     Friend WithEvents lbxResult As System.Windows.Forms.ListBox
+    Friend WithEvents btnDefault As System.Windows.Forms.Button
 
 End Class

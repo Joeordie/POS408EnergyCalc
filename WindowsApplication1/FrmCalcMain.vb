@@ -1,12 +1,19 @@
-﻿Public Class FrmMain
+﻿Imports System.IO
+
+Public Class FrmMain
     'Declare Form-wide variables
     Dim decTotalCost As Decimal = 0
     Dim decGrandTotalKWh As Decimal = 0
     Dim decGrandTotalGallon As Decimal = 0
     Dim decGallonTotalCost As Decimal = 0
+    Dim decDefaults(10) As Decimal ' Defaults array from fileRead out.
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Nothing
+        'Load decDefaults Array with zeros to prevent bad things
+        For i = 0 To 10
+            decDefaults(i) = 0
+        Next
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -43,7 +50,7 @@
                 'Set Operating hours on appliances that use water. 
                 FrmWater.decOpHrs = decApplianceOpHours
                 ' 
-                '  ListView Loading Result
+                'ListView Loading Result
                 'Dim objLoader As ListViewItem
                 ' 
                 'Build and load array of strings 
@@ -110,6 +117,53 @@
         End If
     End Function
 
+    Function FileChoser(strIntent As String) As String
+
+        'Taken from http://stackoverflow.com/questions/3283423/how-to-add-a-browse-to-file-dialog-to-a-vb-net-application
+        Dim objFileDialog = New OpenFileDialog
+        Dim strFilePath As String
+        'Set File Chooser attributes 
+        objFileDialog.Title = "Select Config File"
+        objFileDialog.InitialDirectory = "C:\Users\"
+        objFileDialog.Filter = "Config files (*.conf)|*.conf|All files (*.*)|*.*" 'set .conf as preferred method of search
+        objFileDialog.FilterIndex = 1
+        objFileDialog.RestoreDirectory = True
+        'If the OK button is selected return strFilePath
+        If objFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            strFilePath = objFileDialog.FileName
+        Else ' if anything other than OK happens no file :(
+            strFilePath = "null"
+        End If
+        'Check to see what reason were using file chooser defaults or reports!
+        If strIntent = "default" Then
+            Defaults(strFilePath)
+        ElseIf strIntent = "report" Then
+            'Reports(strFilePatha)
+        End If
+        Return strFilePath
+    End Function
+
+    Function Defaults(strFilePath As String) 'As Integer()
+        'Declare variables for function
+        'Return Array 
+        If strFilePath = "null" Then ' Check for no file selected
+            MessageBox.Show("No file selected.")
+        Else
+            Dim strWorkingString As String 'we readinto this
+            Dim objFileReader = New StreamReader(strFilePath) 'Object to read file
+            strWorkingString = objFileReader.ReadLine 'Read fileline out
+            For index = 0 To 10
+                strWorkingString = strWorkingString.Substring(1 + strWorkingString.IndexOf("="))
+                decDefaults(index) = strWorkingString
+                strWorkingString = objFileReader.ReadLine
+            Next
+            objFileReader.Close() 'close file so not to let flies in. 
+        End If
+
+        Return 0
+        'intDefaults()
+    End Function
+
     Private Sub ClearForm()
         'set all displays and global variables to default values
         tbxHoursOp.Text = "0"
@@ -140,4 +194,15 @@
         'Taken from: http://www.visual-basic-tutorials.com/allow-numbers-only-in-a-text-in-visual-basic.htm#sthash.JZWOwt12.dpuf
     End Sub
 
+    Private Sub btnDefault_Click(sender As Object, e As EventArgs) Handles btnDefault.Click
+        FileChoser("default")
+    End Sub
+
+    Private Sub cbxAppliance_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxAppliance.SelectedIndexChanged
+        Dim intIndexNum As Integer = cbxAppliance.SelectedIndex
+        If intIndexNum < 10 Then
+            tbxKWh.Text = decDefaults(intIndexNum)
+            tbxRate.Text = decDefaults(10)
+        End If
+    End Sub
 End Class
