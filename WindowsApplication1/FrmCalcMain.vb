@@ -6,12 +6,11 @@ Public Class FrmMain
     Dim decGrandTotalKWh As Decimal = 0
     Dim decGrandTotalGallon As Decimal = 0
     Dim decGallonTotalCost As Decimal = 0
-    Dim decDefaults(10) As Decimal ' Defaults array from fileRead out.
-
+    Public decDefaults(11) As Decimal ' Defaults array from fileRead out needed several places
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load decDefaults Array with zeros to prevent bad things
-        For i = 0 To 10
+        For i = 0 To 11
             decDefaults(i) = 0
         Next
     End Sub
@@ -118,32 +117,56 @@ Public Class FrmMain
     End Function
 
     Function FileChoser(strIntent As String) As String
-
-        'Taken from http://stackoverflow.com/questions/3283423/how-to-add-a-browse-to-file-dialog-to-a-vb-net-application
-        Dim objFileDialog = New OpenFileDialog
         Dim strFilePath As String
-        'Set File Chooser attributes 
-        objFileDialog.Title = "Select Config File"
-        objFileDialog.InitialDirectory = "C:\Users\"
-        objFileDialog.Filter = "Config files (*.conf)|*.conf|All files (*.*)|*.*" 'set .conf as preferred method of search
-        objFileDialog.FilterIndex = 1
-        objFileDialog.RestoreDirectory = True
-        'If the OK button is selected return strFilePath
-        If objFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            strFilePath = objFileDialog.FileName
-        Else ' if anything other than OK happens no file :(
-            strFilePath = "null"
-        End If
-        'Check to see what reason were using file chooser defaults or reports!
-        If strIntent = "default" Then
-            Defaults(strFilePath)
+        'Taken from http://stackoverflow.com/questions/3283423/how-to-add-a-browse-to-file-dialog-to-a-vb-net-application
+        If strIntent = "defaultIn" Then 'Flow Control for file choices
+            Dim objFileDialog = New OpenFileDialog
+            'Set File Chooser attributes 
+            objFileDialog.Title = "Select Config File" 'Title
+            objFileDialog.InitialDirectory = "C:\Users\" 'Startup Path
+            objFileDialog.Filter = "Config files (*.conf)|*.conf|All files (*.*)|*.*" 'set .conf as preferred method of search
+            objFileDialog.FilterIndex = 1 'Filter index to start on
+            objFileDialog.RestoreDirectory = True 'Return to this directory if opened again
+            'If the OK button is selected return strFilePath
+            If objFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                strFilePath = objFileDialog.FileName
+            Else ' if anything other than OK happens no file :(
+                strFilePath = "null"
+            End If
+            DefaultsIn(strFilePath) ' See above
+        ElseIf strIntent = "defaultOut" Then
+            Dim objFileDialog = New SaveFileDialog
+            objFileDialog.Title = "Save Config File"
+            objFileDialog.InitialDirectory = ("C:\Users\")
+            objFileDialog.Filter = "Config files (*.conf)|*.conf|All files (*.*)|*.*" 'set .conf as preferred method of search
+            objFileDialog.FilterIndex = 1
+            objFileDialog.RestoreDirectory = True
+            If objFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                strFilePath = objFileDialog.FileName
+                frmDefaults.Close()
+            Else ' if anything other than OK happens no file :(
+                strFilePath = "null"
+            End If
+            DefaultsOut(strFilePath)
         ElseIf strIntent = "report" Then
-            'Reports(strFilePatha)
+            Dim objFileDialog = New SaveFileDialog
+            objFileDialog.Title = "Save Report File"
+            objFileDialog.InitialDirectory = ("C:\Users\")
+            objFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"
+            objFileDialog.FilterIndex = 1
+            objFileDialog.RestoreDirectory = True
+            If objFileDialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                strFilePath = objFileDialog.FileName
+                reportWriter(strFilePath)
+            Else ' if anything other than OK happens no file :(
+                strFilePath = "null"
+            End If
         End If
+
         Return strFilePath
     End Function
 
-    Function Defaults(strFilePath As String) 'As Integer()
+    Function DefaultsIn(strFilePath As String) 'As Integer()
         'Declare variables for function
         'Return Array 
         If strFilePath = "null" Then ' Check for no file selected
@@ -152,10 +175,11 @@ Public Class FrmMain
             Dim strWorkingString As String 'we readinto this
             Dim objFileReader = New StreamReader(strFilePath) 'Object to read file
             strWorkingString = objFileReader.ReadLine 'Read fileline out
-            For index = 0 To 10
+            For index = 0 To 11 'Loop through array
+                'string = shortened string... count till you get to the = sign then start your cut +1
                 strWorkingString = strWorkingString.Substring(1 + strWorkingString.IndexOf("="))
-                decDefaults(index) = strWorkingString
-                strWorkingString = objFileReader.ReadLine
+                decDefaults(index) = strWorkingString 'Pass to array
+                strWorkingString = objFileReader.ReadLine 'read next line!
             Next
             objFileReader.Close() 'close file so not to let flies in. 
         End If
@@ -163,6 +187,44 @@ Public Class FrmMain
         Return 0
         'intDefaults()
     End Function
+
+    Sub DefaultsOut(strFilePath As String)
+        'Instantiate writer object pass filepath and append = False
+        Dim objStreamWriter As StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(strFilePath, False)
+        'Write out string:
+        objStreamWriter.WriteLine("fridge=" & decDefaults(0) & vbNewLine & _
+                                  "TV =" & decDefaults(1) & vbNewLine & _
+                                  "SpaceHeater =" & decDefaults(2) & vbNewLine & _
+                                  "Fan =" & decDefaults(3) & vbNewLine & _
+                                  "Dryer =" & decDefaults(4) & vbNewLine & _
+                                  "Oven =" & decDefaults(5) & vbNewLine & _
+                                  "DishWasher =" & decDefaults(6) & vbNewLine & _
+                                  "WashingMachine =" & decDefaults(7) & vbNewLine & _
+                                  "ElectricRate =" & decDefaults(8) & vbNewLine & _
+                                  "DishWasherH20 =" & decDefaults(9) & vbNewLine & _
+                                  "WashingMachineH20 =" & decDefaults(10) & vbNewLine & _
+                                  "WaterRate=" & decDefaults(11))
+        objStreamWriter.Close() ' Close writer to prevent flies from getting in
+    End Sub
+
+    Private Sub reportWriter(strFilePath As String)
+        Dim objStreamWriter As StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(strFilePath, False)
+        Dim intlineCount As Integer = lbxResult.Items.Count
+        Dim DateNow As Date = Today
+        objStreamWriter.WriteLine("Application Power Consumption  " & DateNow & vbNewLine & _
+                                  "===============================================================")
+        For i = 0 To (intlineCount - 1)
+            objStreamWriter.WriteLine(lbxResult.Items(i))
+        Next
+        objStreamWriter.WriteLine("===============================================================")
+        objStreamWriter.WriteLine("Total KWh: " & FormatCurrency(tbxGrandTotalKWh.Text) & vbTab & vbTab & "Total Energy Cost: " & FormatCurrency(tbxTotalEnergyCost.Text) & vbNewLine)
+        objStreamWriter.WriteLine("Total Gallons: " & FormatCurrency(tbxTotalGallonCost.Text) & vbTab & vbTab & "Total Water Cost: " & FormatCurrency(tbxTotalGallonCost.Text) & vbNewLine)
+        Dim dblA As Double = Convert.ToDouble(tbxTotalEnergyCost.Text.Substring(1))
+        Dim dblB As Double = Convert.ToDouble(tbxTotalGallonCost.Text.Substring(1))
+        Dim dblTotal As Double = (dblA + dblB)
+        objStreamWriter.WriteLine("Total Cost:  " & FormatCurrency(dblTotal))
+        objStreamWriter.Close()
+    End Sub
 
     Private Sub ClearForm()
         'set all displays and global variables to default values
@@ -194,15 +256,60 @@ Public Class FrmMain
         'Taken from: http://www.visual-basic-tutorials.com/allow-numbers-only-in-a-text-in-visual-basic.htm#sthash.JZWOwt12.dpuf
     End Sub
 
-    Private Sub btnDefault_Click(sender As Object, e As EventArgs) Handles btnDefault.Click
-        FileChoser("default")
-    End Sub
 
     Private Sub cbxAppliance_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxAppliance.SelectedIndexChanged
-        Dim intIndexNum As Integer = cbxAppliance.SelectedIndex
-        If intIndexNum < 10 Then
-            tbxKWh.Text = decDefaults(intIndexNum)
-            tbxRate.Text = decDefaults(10)
+        Dim intIndexNum As Integer = cbxAppliance.SelectedIndex 'create indexnumber
+        tbxKWh.Text = decDefaults(intIndexNum) 'items 0 through 7 are appliances
+        tbxRate.Text = decDefaults(8) 'item 8 is rate
+        If intIndexNum = 6 Then
+            FrmWater.tbxGallonsPerHour.Text = decDefaults(9) 'item 9 is GPH for item 6
+            FrmWater.tbxPricePerGallon.Text = decDefaults(11) 'item 11 is GPH rate
+        ElseIf intIndexNum = 7 Then
+            FrmWater.tbxGallonsPerHour.Text = decDefaults(10) 'item 10 is GPH for item 7
+            FrmWater.tbxPricePerGallon.Text = decDefaults(11) 'item 11 is GPH rate
+        Else
+            FrmWater.tbxGallonsPerHour.Text = 0 'if any other index is chosen set water rate to zero
+            FrmWater.tbxPricePerGallon.Text = 0 'if any other index is chosen set water price to zero
         End If
     End Sub
+
+    Private Sub LoadDefaultsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadDefaultsToolStripMenuItem.Click
+        FileChoser("defaultIn")
+    End Sub
+
+    Private Sub SourceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SourceToolStripMenuItem.Click
+        Try
+            UseWaitCursor = True 'While loading github page turn cursor to waiting... so people know whats up
+            Process.Start("https://github.com/Joeordie/POS408EnergyCalc") 'Launch default browser to http://
+        Catch en As Exception
+
+        Finally
+            UseWaitCursor = False ' when its all done set cursor back to normal!
+        End Try
+
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        'this is the about pop up. 
+        MessageBox.Show("Author: Jonathan Carroll" & vbNewLine & _
+                        "For: POS408, UOP" & vbNewLine & _
+                        "Liscence: BSD" & vbNewLine & vbNewLine & "I pity the fool!", "About")
+    End Sub
+
+    Private Sub SaveDefaultsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveDefaultsToolStripMenuItem.Click
+        frmDefaults.Show() 'load defaults form.  ( i know its a lot of fields. blah blah blah! it is okay for this application. 
+        FileChoser("defaultsout")
+    End Sub
+
+    'Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
+    '    Dim intIndex2 As Integer = lbxResult.SelectedIndex
+    '    lbxResult.Items.RemoveAt(intIndex2)
+    'End Sub
+
+    Private Sub ExportReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportReportToolStripMenuItem.Click
+        FileChoser("report")
+    End Sub
+
+    
+
 End Class

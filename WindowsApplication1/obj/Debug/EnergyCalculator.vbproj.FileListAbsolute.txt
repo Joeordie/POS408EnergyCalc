@@ -10,3 +10,4 @@ C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debu
 C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.FrmWater.resources
 C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.Resources.resources
 C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\EnergyCalculator.vbproj.GenerateResource.Cache
+C:\Users\carro\ownCloud\HomeWork\POS408\Week3POS408\WindowsApplication1\obj\Debug\WindowsApplication1.frmDefaults.resources

@@ -70,6 +70,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Defaults.Designer.vb">
+      <DependentUpon>Defaults.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Defaults.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmCalcMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Defaults.resx">
+      <DependentUpon>Defaults.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmCalcMain.resx">
       <DependentUpon>FrmCalcMain.vb</DependentUpon>
     </EmbeddedResource>

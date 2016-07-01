@@ -41,14 +41,24 @@ Partial Class FrmMain
         Me.lblTotalWaterCost = New System.Windows.Forms.Label()
         Me.tbxTotalGallonCost = New System.Windows.Forms.TextBox()
         Me.lbxResult = New System.Windows.Forms.ListBox()
-        Me.btnDefault = New System.Windows.Forms.Button()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadDefaultsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveDefaultsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SourceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbxAppliance
         '
         Me.cbxAppliance.FormattingEnabled = True
         Me.cbxAppliance.Items.AddRange(New Object() {"Refrigerator", "TV", "Space Heater", "Fan", "Dryer", "Oven", "Dish Washer", "Washing Machine"})
-        Me.cbxAppliance.Location = New System.Drawing.Point(120, 25)
+        Me.cbxAppliance.Location = New System.Drawing.Point(120, 33)
         Me.cbxAppliance.Name = "cbxAppliance"
         Me.cbxAppliance.Size = New System.Drawing.Size(297, 21)
         Me.cbxAppliance.TabIndex = 0
@@ -56,7 +66,7 @@ Partial Class FrmMain
         'lblAppliance
         '
         Me.lblAppliance.AutoSize = True
-        Me.lblAppliance.Location = New System.Drawing.Point(13, 33)
+        Me.lblAppliance.Location = New System.Drawing.Point(12, 36)
         Me.lblAppliance.Name = "lblAppliance"
         Me.lblAppliance.Size = New System.Drawing.Size(54, 13)
         Me.lblAppliance.TabIndex = 1
@@ -73,7 +83,7 @@ Partial Class FrmMain
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(120, 157)
+        Me.btnClear.Location = New System.Drawing.Point(106, 157)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 4
@@ -208,14 +218,74 @@ Partial Class FrmMain
         Me.lbxResult.Size = New System.Drawing.Size(410, 264)
         Me.lbxResult.TabIndex = 21
         '
-        'btnDefault
+        'MenuStrip1
         '
-        Me.btnDefault.Location = New System.Drawing.Point(227, 157)
-        Me.btnDefault.Name = "btnDefault"
-        Me.btnDefault.Size = New System.Drawing.Size(103, 23)
-        Me.btnDefault.TabIndex = 22
-        Me.btnDefault.Text = "Load Defaults"
-        Me.btnDefault.UseVisualStyleBackColor = True
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(445, 24)
+        Me.MenuStrip1.TabIndex = 22
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadDefaultsToolStripMenuItem, Me.SaveDefaultsToolStripMenuItem, Me.ExportReportToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'LoadDefaultsToolStripMenuItem
+        '
+        Me.LoadDefaultsToolStripMenuItem.Name = "LoadDefaultsToolStripMenuItem"
+        Me.LoadDefaultsToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.LoadDefaultsToolStripMenuItem.Text = "Load Defaults"
+        '
+        'SaveDefaultsToolStripMenuItem
+        '
+        Me.SaveDefaultsToolStripMenuItem.Name = "SaveDefaultsToolStripMenuItem"
+        Me.SaveDefaultsToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.SaveDefaultsToolStripMenuItem.Text = "Save Defaults"
+        '
+        'ExportReportToolStripMenuItem
+        '
+        Me.ExportReportToolStripMenuItem.Name = "ExportReportToolStripMenuItem"
+        Me.ExportReportToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExportReportToolStripMenuItem.Text = "Export Report"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'HelpToolStripMenuItem
+        '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SourceToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Text = "Help"
+        '
+        'SourceToolStripMenuItem
+        '
+        Me.SourceToolStripMenuItem.Name = "SourceToolStripMenuItem"
+        Me.SourceToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
+        Me.SourceToolStripMenuItem.Text = "Source"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'btnRemove
+        '
+        Me.btnRemove.Location = New System.Drawing.Point(196, 157)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(75, 23)
+        Me.btnRemove.TabIndex = 23
+        Me.btnRemove.Text = "Remove"
+        Me.btnRemove.UseVisualStyleBackColor = True
+        Me.btnRemove.Visible = False
         '
         'FrmMain
         '
@@ -223,7 +293,7 @@ Partial Class FrmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(445, 585)
-        Me.Controls.Add(Me.btnDefault)
+        Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.lbxResult)
         Me.Controls.Add(Me.tbxTotalGallonCost)
         Me.Controls.Add(Me.lblTotalWaterCost)
@@ -243,8 +313,12 @@ Partial Class FrmMain
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lblAppliance)
         Me.Controls.Add(Me.cbxAppliance)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FrmMain"
         Me.Text = "Energy Calculator"
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -268,6 +342,15 @@ Partial Class FrmMain
     Friend WithEvents lblTotalWaterCost As System.Windows.Forms.Label
     Friend WithEvents tbxTotalGallonCost As System.Windows.Forms.TextBox
     Friend WithEvents lbxResult As System.Windows.Forms.ListBox
-    Friend WithEvents btnDefault As System.Windows.Forms.Button
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LoadDefaultsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveDefaultsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SourceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExportReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnRemove As System.Windows.Forms.Button
 
 End Class
